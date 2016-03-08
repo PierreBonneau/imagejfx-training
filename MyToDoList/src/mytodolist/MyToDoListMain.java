@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author pierre
  */
-public class MyToDoList extends Application {
+public class MyToDoListMain extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
