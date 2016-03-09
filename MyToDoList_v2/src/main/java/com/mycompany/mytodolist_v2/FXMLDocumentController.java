@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.Observable;
-import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,8 +20,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.layout.HBox;
+import org.scijava.event.EventHandler;
+import org.scijava.plugin.Parameter;
 
 /**
  *
@@ -48,13 +48,15 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button deteleBtn;
 
-    private ItfTaskList tasksList;
+    @Parameter
+    TaskListService tasksList;
     
     ObservableList<TaskWrapper> wrapperList = FXCollections.observableArrayList();
     
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
-        tasksList = new TasksList();
-        tasksList.addTaskListeners(this::onTaskEvent);
+        tasksList = new DefaultTaskListService();
+//        tasksList.addTaskListeners(this::onTaskEvent);
         listView.setCellFactory(this::addCell);
         tasksList.getTasks().forEach(t -> wrapperList.add(new TaskWrapper(t)));
         listView.setItems(wrapperList);
@@ -72,21 +74,22 @@ public class FXMLDocumentController implements Initializable {
     }
     
     public void deleteSelected() {
-        List<ItfTask> toRemove =  new ArrayList<>();
+        List<Task> toRemove =  new ArrayList<>();
         tasksList.getTasks().stream()
                 .filter(t -> t.getDone())
                 .forEach(t -> toRemove.add(t));
-        for(ItfTask t : toRemove){
+        toRemove.stream().forEach((t) -> {
             tasksList.deleteTask(t);
-        }
+        });
         //tasksList.getTasks().removeAll(toRemove);
-        System.out.println("Selected element deleted");
+        System.out.println("Selected element has been deleted");
     }
     
     public ListCell<TaskWrapper> addCell(ListView<TaskWrapper> listView){
         return new TaskCell();
     }
     
+    @EventHandler
     public void onTaskEvent(TaskEvent event){
         if(event.getType() == TaskEnum.TASK_ADDED){
             wrapperList.add(new TaskWrapper(event.getTask()));

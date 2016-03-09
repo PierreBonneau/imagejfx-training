@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.scijava.SciJava;
 
 /**
  *
@@ -27,6 +28,10 @@ public class MyToDoListMain extends Application {
         stage.setScene(scene);
         stage.setMinHeight(300.0);
         stage.setMinWidth(400.0);
+        
+        SciJava context = new SciJava();
+        context.context().inject(root);
+        
         stage.show();
     }
 

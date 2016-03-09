@@ -7,16 +7,16 @@ package com.mycompany.mytodolist_v2;
 
 import java.util.List;
 import java.util.function.Consumer;
-import javafx.collections.ObservableList;
+import org.scijava.service.SciJavaService;
 
 /**
  *
  * @author pierre
  */
-public interface ItfTaskList {
-    public List<ItfTask> getTasks();
+public interface TaskListService extends SciJavaService{
+    public List<Task> getTasks();
     public void addTask(String name);
-    public void addTask(ItfTask task);
-    public void deleteTask(ItfTask task);
+    public void addTask(Task task);
+    public void deleteTask(Task task);
     public void addTaskListeners(Consumer<TaskEvent> listener);
 }

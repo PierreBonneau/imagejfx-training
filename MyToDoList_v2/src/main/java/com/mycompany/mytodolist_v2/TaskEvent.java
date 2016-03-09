@@ -5,15 +5,17 @@
  */
 package com.mycompany.mytodolist_v2;
 
+import org.scijava.event.SciJavaEvent;
+
 /**
  *
  * @author pierre
  */
-public class TaskEvent {
-    private TaskEnum type;
-    private ItfTask task;
+public class TaskEvent extends SciJavaEvent{
+    private final TaskEnum type;
+    private final Task task;
     
-    public TaskEvent(TaskEnum type, ItfTask task){
+    public TaskEvent(TaskEnum type, Task task){
         this.type = type;
         this.task = task;
     }
@@ -22,7 +24,7 @@ public class TaskEvent {
         return this.type;
     }
     
-    public ItfTask getTask(){
+    public Task getTask(){
         return this.task;
     }
 }

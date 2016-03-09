@@ -14,12 +14,12 @@ import javafx.beans.property.adapter.JavaBeanStringPropertyBuilder;
  *
  * @author pierre
  */
-public class TaskWrapper implements ItfTask{
-    private ItfTask task;
+public class TaskWrapper implements Task{
+    private Task task;
     private Property<String> nameProperty;
     private Property<Boolean> doneProperty;
     
-    public TaskWrapper(ItfTask task){
+    public TaskWrapper(Task task){
         this.task = task;
         try {
             this.nameProperty = new JavaBeanStringPropertyBuilder().bean(task).name("name").build();
@@ -56,7 +56,7 @@ public class TaskWrapper implements ItfTask{
         return this.doneProperty;
     }
     
-    public ItfTask getTask(){
+    public Task getTask(){
         return this.task;
     }
 }
