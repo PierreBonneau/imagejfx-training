@@ -1,0 +1,10 @@
+com/mycompany/mytodolist_v2/ItfTaskList.class
+com/mycompany/mytodolist_v2/TaskWrapper.class
+com/mycompany/mytodolist_v2/TaskEnum.class
+com/mycompany/mytodolist_v2/FXMLDocumentController.class
+com/mycompany/mytodolist_v2/TaskEvent.class
+com/mycompany/mytodolist_v2/Task.class
+com/mycompany/mytodolist_v2/MyToDoListMain.class
+com/mycompany/mytodolist_v2/FXMLDocumentController$TaskCell.class
+com/mycompany/mytodolist_v2/TasksList.class
+com/mycompany/mytodolist_v2/ItfTask.class
