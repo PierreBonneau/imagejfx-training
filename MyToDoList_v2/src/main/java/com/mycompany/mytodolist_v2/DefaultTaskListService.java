@@ -20,7 +20,7 @@ import org.scijava.service.SciJavaService;
  */
 
 @Plugin(type = SciJavaService.class)
-public final class DefaultTaskListService extends AbstractService implements TaskListService{
+public class DefaultTaskListService extends AbstractService implements TaskListService{
     
     public List<Task> tasks = new ArrayList<>();
     public List<Consumer<TaskEvent>> listenersList = new ArrayList<>();

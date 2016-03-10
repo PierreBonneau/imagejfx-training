@@ -21,6 +21,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import org.scijava.Context;
 import org.scijava.event.EventHandler;
 import org.scijava.plugin.Parameter;
 
@@ -58,7 +59,8 @@ public class ToDoUi extends AnchorPane {
         loader.setRoot(this);
         loader.setController(this);
         loader.load();
-
+        
+                
 //        tasksList = new DefaultTaskListService();
 //        tasksList.addTaskListeners(this::onTaskEvent);
         listView.setCellFactory(this::addCell);

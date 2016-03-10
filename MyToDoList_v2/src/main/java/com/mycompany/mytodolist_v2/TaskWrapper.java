@@ -5,7 +5,6 @@
  */
 package com.mycompany.mytodolist_v2;
 
-import java.util.Properties;
 import javafx.beans.property.Property;
 import javafx.beans.property.adapter.JavaBeanObjectPropertyBuilder;
 import javafx.beans.property.adapter.JavaBeanStringPropertyBuilder;
