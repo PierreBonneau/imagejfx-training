@@ -5,21 +5,21 @@
  */
 package com.mycompany.mytodolist_v2;
 
-import java.net.URL;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import org.scijava.event.EventHandler;
 import org.scijava.plugin.Parameter;
@@ -28,7 +28,7 @@ import org.scijava.plugin.Parameter;
  *
  * @author pierre
  */
-public class FXMLDocumentController implements Initializable {  
+public class ToDoUi extends AnchorPane {  
     
     @FXML
     private Label title;
@@ -49,16 +49,19 @@ public class FXMLDocumentController implements Initializable {
     private Button deteleBtn;
 
     @Parameter
-    TaskListService tasksList;
+    public TaskListService tasksList;
     
     ObservableList<TaskWrapper> wrapperList = FXCollections.observableArrayList();
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        tasksList = new DefaultTaskListService();
+
+    public ToDoUi() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FXMLDocument.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
+        loader.load();
+
+//        tasksList = new DefaultTaskListService();
 //        tasksList.addTaskListeners(this::onTaskEvent);
         listView.setCellFactory(this::addCell);
-        tasksList.getTasks().forEach(t -> wrapperList.add(new TaskWrapper(t)));
         listView.setItems(wrapperList);
         textField.setPromptText("New task");
     }

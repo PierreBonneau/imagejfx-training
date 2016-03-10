@@ -8,7 +8,6 @@ package com.mycompany.mytodolist_v2;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import org.scijava.event.DefaultEventService;
 import org.scijava.event.EventService;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
@@ -21,7 +20,7 @@ import org.scijava.service.SciJavaService;
  */
 
 @Plugin(type = SciJavaService.class)
-public class DefaultTaskListService extends AbstractService implements TaskListService{
+public final class DefaultTaskListService extends AbstractService implements TaskListService{
     
     public List<Task> tasks = new ArrayList<>();
     public List<Consumer<TaskEvent>> listenersList = new ArrayList<>();
@@ -42,7 +41,6 @@ public class DefaultTaskListService extends AbstractService implements TaskListS
     public void addTask(Task task){
         tasks.add(task);
         TaskEvent e = new TaskEvent(TaskEnum.TASK_ADDED, task);
-        eventService.getInfo();
         eventService.publish(e);
 //        fireEvent(new TaskEvent(TaskEnum.TASK_ADDED, task));
         System.out.println("Task added");
@@ -56,14 +54,14 @@ public class DefaultTaskListService extends AbstractService implements TaskListS
         System.out.println("Task deleted");
     }
     
-    @Override
-    public void addTaskListeners (Consumer<TaskEvent> listener){
-        listenersList.add(listener);
-    }
+//    @Override
+//    public void addTaskListeners (Consumer<TaskEvent> listener){
+//        listenersList.add(listener);
+//    }
     
     public void fireEvent(TaskEvent event){
-        for (Consumer<TaskEvent> listener : listenersList){
+        listenersList.stream().forEach((listener) -> {
             listener.accept(event);
-        }
+        });
     }
 }

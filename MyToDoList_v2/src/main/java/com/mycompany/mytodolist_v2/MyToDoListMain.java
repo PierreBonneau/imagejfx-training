@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.scijava.Context;
 import org.scijava.SciJava;
 
 /**
@@ -21,16 +22,19 @@ public class MyToDoListMain extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/FXMLDocument.fxml"));
-        Scene scene = new Scene(root, 500, 400);
+        ToDoUi ui = new ToDoUi();
+
+//        SciJava scijava = new SciJava();
+//        ui.tasksList.setContext(scijava.context());
+//        scijava.context().inject(ui);
+        Context context = new Context();
+        context.inject(ui);
+        Scene scene = new Scene(ui, 500, 400);
         
         stage.setTitle("TODO");
         stage.setScene(scene);
         stage.setMinHeight(300.0);
         stage.setMinWidth(400.0);
-        
-        SciJava context = new SciJava();
-        context.context().inject(root);
         
         stage.show();
     }

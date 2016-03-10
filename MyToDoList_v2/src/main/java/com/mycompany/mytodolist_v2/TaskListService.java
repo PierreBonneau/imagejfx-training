@@ -6,7 +6,6 @@
 package com.mycompany.mytodolist_v2;
 
 import java.util.List;
-import java.util.function.Consumer;
 import org.scijava.service.SciJavaService;
 
 /**
@@ -18,5 +17,5 @@ public interface TaskListService extends SciJavaService{
     public void addTask(String name);
     public void addTask(Task task);
     public void deleteTask(Task task);
-    public void addTaskListeners(Consumer<TaskEvent> listener);
+//    public void addTaskListeners(Consumer<TaskEvent> listener);
 }
