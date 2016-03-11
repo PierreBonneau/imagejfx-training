@@ -13,5 +13,8 @@ import org.scijava.plugin.Plugin;
  */
 @Plugin(type = TaskManagerPlugin.class, label = "Select All")
 public class SetAllDone implements TaskManagerPlugin{
-    
+    @Override
+    public void execute(){
+        
+    }
 }
