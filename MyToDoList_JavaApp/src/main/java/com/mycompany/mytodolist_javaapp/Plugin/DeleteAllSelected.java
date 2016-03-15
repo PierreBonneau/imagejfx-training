@@ -5,10 +5,22 @@
  */
 package com.mycompany.mytodolist_javaapp.Plugin;
 
+import com.mycompany.mytodolist_javaapp.TaskListService;
+import org.scijava.plugin.Parameter;
+import org.scijava.plugin.Plugin;
+
 /**
  *
  * @author pierre
  */
-public class DeleteAllSelected {
-    
+@Plugin(type = TaskManagerPlugin.class, label = "Delete selected", priority = 0)
+
+public class DeleteAllSelected implements TaskManagerPlugin{
+    @Parameter
+    TaskListService tasksList;
+            
+    @Override
+    public void execute(){
+        tasksList.deleteSelected();
+    }
 }

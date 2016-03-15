@@ -11,6 +11,6 @@ import org.scijava.plugin.SciJavaPlugin;
  *
  * @author pierre
  */
-public interface TaskManagerPlugin extends SciJavaPlugin{
+public interface TaskManagerPlugin extends SciJavaPlugin {
     public void execute();
 }

@@ -7,7 +7,6 @@ package com.mycompany.mytodolist_javaapp;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import org.scijava.event.EventService;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
@@ -54,6 +53,25 @@ public class DefaultTaskListService extends AbstractService implements TaskListS
         System.out.println("Task deleted");
     }
     
+    @Override
+    public void checkAll() {
+        tasks.forEach(t -> t.setDone(true));
+        eventService.publish(new TaskEvent(TaskEnum.ALL_SELECTED));
+        System.out.println("All tasks have been selected");
+    }
+    
+    @Override
+    public void deleteSelected() {
+        List<Task> toRemove =  new ArrayList<>();
+        tasks.stream()
+                .filter(t -> t.getDone())
+                .forEach(t -> toRemove.add(t));
+        toRemove.stream().forEach((t) -> {
+            deleteTask(t);
+        });
+        //tasksList.getTasks().removeAll(toRemove);
+        System.out.println("Selected element has been deleted");
+    }
 //    @Override
 //    public void addTaskListeners (Consumer<TaskEvent> listener){
 //        listenersList.add(listener);

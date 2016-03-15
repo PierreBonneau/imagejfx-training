@@ -11,5 +11,6 @@ package com.mycompany.mytodolist_javaapp;
  */
 public enum TaskEnum {
     TASK_ADDED,
-    TASK_DELETED    
+    TASK_DELETED,
+    ALL_SELECTED
 }

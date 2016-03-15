@@ -18,7 +18,7 @@ import org.scijava.plugin.PluginService;
  *
  * @author pierre
  */
-public class TaskManagerToolBar extends ToolBar{
+public class TaskManagerToolBar extends ToolBar {
     @Parameter
     PluginService pluginService;
     
@@ -26,19 +26,20 @@ public class TaskManagerToolBar extends ToolBar{
         context.inject(this);
         pluginService
                 .getPluginsOfType(TaskManagerPlugin.class)
-                .forEach(this::addPlugin);
+                .forEach(p->addPlugin(p, context));
    }
     
-   public void addPlugin(PluginInfo<TaskManagerPlugin> pluginInfo){
+   public void addPlugin(PluginInfo<TaskManagerPlugin> pluginInfo, Context context){
        Button btn = new Button(pluginInfo.getLabel());
        try{
             TaskManagerPlugin plugin = pluginInfo.createInstance();
+            context.inject(plugin);
             btn.setOnAction(actionEvent->applyPlugin(plugin));
        }
        catch(InstantiableException ie){
            System.out.println(ie);
        }
-       getItems().add(btn);
+       this.getItems().add(btn);
    }
    
    public void applyPlugin(TaskManagerPlugin plugin){

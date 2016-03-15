@@ -15,6 +15,11 @@ public class TaskEvent extends SciJavaEvent{
     private final TaskEnum type;
     private final Task task;
     
+    public TaskEvent(TaskEnum type){
+        this.type = type;
+        this.task = null;
+    }
+    
     public TaskEvent(TaskEnum type, Task task){
         this.type = type;
         this.task = task;

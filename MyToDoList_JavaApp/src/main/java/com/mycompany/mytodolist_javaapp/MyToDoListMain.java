@@ -20,13 +20,12 @@ public class MyToDoListMain extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        ToDoUi ui = new ToDoUi();
-
         SciJava scijava = new SciJava();
 //        Context context = new Context();
 //        scijava.setContext(context);
+        ToDoUi ui = new ToDoUi(scijava.context());
 
-        scijava.context().inject(ui);
+//        scijava.context().inject(ui);
 
         Scene scene = new Scene(ui, 500, 400);
         
