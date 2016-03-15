@@ -22,7 +22,6 @@ import org.scijava.service.SciJavaService;
 public class DefaultTaskListService extends AbstractService implements TaskListService{
     
     public List<Task> tasks = new ArrayList<>();
-//    public List<Consumer<TaskEvent>> listenersList = new ArrayList<>();
     
     @Parameter
     EventService eventService;// = new DefaultEventService();
@@ -41,7 +40,6 @@ public class DefaultTaskListService extends AbstractService implements TaskListS
         tasks.add(task);
         TaskEvent e = new TaskEvent(TaskEnum.TASK_ADDED, task);
         eventService.publish(e);
-//        fireEvent(new TaskEvent(TaskEnum.TASK_ADDED, task));
         System.out.println("Task added");
     }
     
@@ -49,7 +47,6 @@ public class DefaultTaskListService extends AbstractService implements TaskListS
     public void deleteTask(Task task) {
         tasks.remove(task);
         eventService.publish(new TaskEvent(TaskEnum.TASK_DELETED, task));
-//        fireEvent(new TaskEvent(TaskEnum.TASK_DELETED, task));
         System.out.println("Task deleted");
     }
     
@@ -69,17 +66,12 @@ public class DefaultTaskListService extends AbstractService implements TaskListS
         toRemove.stream().forEach((t) -> {
             deleteTask(t);
         });
-        //tasksList.getTasks().removeAll(toRemove);
         System.out.println("Selected element has been deleted");
     }
-//    @Override
-//    public void addTaskListeners (Consumer<TaskEvent> listener){
-//        listenersList.add(listener);
-//    }
     
-//    public void fireEvent(TaskEvent event){
-//        listenersList.stream().forEach((listener) -> {
-//            listener.accept(event);
-//        });
-//    }
+    @Override
+    public void setTasksList(List<Task> tasksList){
+        this.tasks = tasksList;
+        eventService.publish(new TaskEvent(TaskEnum.TASK_LOADED));
+    }
 }

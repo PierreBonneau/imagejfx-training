@@ -45,7 +45,10 @@ public class ToDoUi extends BorderPane {
     private ListView<TaskWrapper> listView;
 
     @FXML
-    private final ToolBar toolBar;
+    private final ToolBar toolBarTaskManager;
+    
+    @FXML
+    private final ToolBar toolBarFileManager;
 
     @Parameter
     TaskListService tasksList;
@@ -62,8 +65,11 @@ public class ToDoUi extends BorderPane {
         loader.load();
         context.inject(this);
         
-        toolBar = new TaskManagerToolBar(context);
-        this.setTop(toolBar);
+        toolBarTaskManager = new TaskManagerToolBar(context);
+        toolBarFileManager = new FileManagerToolBar(context);
+        
+        this.setBottom(toolBarTaskManager);
+        this.setTop(toolBarFileManager);
         
         listView.setCellFactory(this::addCell);
         listView.setItems(wrapperList);
@@ -93,6 +99,10 @@ public class ToDoUi extends BorderPane {
         }
         else if (event.getType() == TaskEnum.ALL_SELECTED){
             Platform.runLater(() -> wrapperList.stream().forEach(w -> w.setDone(true)));
+        }
+        else if (event.getType() == TaskEnum.TASK_LOADED){
+            Platform.runLater(() -> tasksList.getTasks().stream()
+                    .forEach((t) -> wrapperList.add(new TaskWrapper(t))));
         }
     }
 //    @EventHandler

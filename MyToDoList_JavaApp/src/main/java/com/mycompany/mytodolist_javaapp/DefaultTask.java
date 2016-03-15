@@ -15,10 +15,19 @@ public class DefaultTask implements Task{
     private String name;
     private boolean done;
     
+    public DefaultTask(){
+        
+    }
+    
     public DefaultTask(String name){
         this.name = name;
         this.done = false;
     }
+    
+//    public DefaultTask(String name, boolean done){
+//        this.name = name;
+//        this.done = done;
+//    }
     
     @Override
     public void setName(String name){

@@ -19,5 +19,6 @@ public interface TaskListService extends SciJavaService{
     public void checkAll();
     public void deleteTask(Task task);
     public void deleteSelected();
+    public void setTasksList(List<Task> tasksList);
 //    public void addTaskListeners(Consumer<TaskEvent> listener);
 }

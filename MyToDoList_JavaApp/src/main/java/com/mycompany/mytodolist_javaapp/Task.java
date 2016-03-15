@@ -5,12 +5,14 @@
  */
 package com.mycompany.mytodolist_javaapp;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javafx.collections.ObservableList;
 
 /**
  *
  * @author pierre
  */
+//@JsonDeserialize(as = DefaultTask.class)
 public interface Task {
     public void setName(String name);
     public void setDone(boolean done);
