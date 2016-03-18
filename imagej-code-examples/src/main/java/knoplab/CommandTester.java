@@ -10,7 +10,6 @@ import net.imglib2.algorithm.neighborhood.Neighborhood;
 import net.imglib2.algorithm.neighborhood.RectangleShape;
 import net.imglib2.img.Img;
 import net.imglib2.type.numeric.RealType;
-import net.imglib2.util.RealSum;
 
 import org.scijava.ItemIO;
 import org.scijava.command.Command;
